@@ -49,8 +49,8 @@
             mode=0640
 
 - name: Enable Icinga2 Ido Mysql Feature
-  command: "icinga2-enable-feature ido-{{ icinga2_web_ui_ido }}"
+  command: "icinga2 enable feature ido-{{ icinga2_web_ui_ido }}"
   register: features_result
-  changed_when: "'for these changes to take effect' in features_result.stdout"
+  changed_when: "features_result.stdout.find('changes to take effect') != -1"
   notify:
    - restart icinga2
